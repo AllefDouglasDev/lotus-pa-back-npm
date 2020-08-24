@@ -1,8 +1,7 @@
 {
   "name": "lotus-pa",
   "version": "0.0.1",
-  "description": "lotus-pa CLI",
-  "private": true,
+  "description": "lotus-pa-back CLI",
   "types": "build/types/types.d.ts",
   "bin": {
     "lotus-pa": "bin/lotus-pa"

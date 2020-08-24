@@ -1,0 +1,28 @@
+import <%= props.modelName %>, { <%= props.modelName %>Attributes } from '@models/<%= props.modelName %>'
+import { I<%= props.modelName %>Service } from './types/I<%= props.modelName %>Service'
+
+export default class <%= props.modelName %>Service implements I<%= props.modelName %>Service {
+  create(<%= props.varName %>: <%= props.modelName %>Attributes): Promise<<%= props.modelName %> | null> {
+    return <%= props.modelName %>.create(<%= props.varName %>)
+  }
+
+  findAll(options: <%= props.modelName %>Attributes): Promise<<%= props.modelName %>[]> {
+    throw new Error('Method not implemented.')
+  }
+
+  findByPk(id: number): Promise<<%= props.modelName %> | null> {
+    throw new Error('Method not implemented.')
+  }
+
+  findOne(options: <%= props.modelName %>Attributes): Promise<<%= props.modelName %> | null> {
+    throw new Error('Method not implemented.')
+  }
+
+  update(<%= props.varName %>: <%= props.modelName %>Attributes): Promise<<%= props.modelName %> | null> {
+    throw new Error('Method not implemented.')
+  }
+
+  destroy(id: number): Promise<<%= props.modelName %> | null> {
+    throw new Error('Method not implemented.')
+  }
+}

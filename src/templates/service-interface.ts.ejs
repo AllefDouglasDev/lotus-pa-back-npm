@@ -1,0 +1,7 @@
+import <%= props.modelName %>, { <%= props.modelName %>Attributes } from '@models/<%= props.modelName %>'
+import { IService } from './IService'
+
+export type I<%= props.modelName %>Service = IService<
+  <%= props.modelName %>Attributes,
+  <%= props.modelName %>
+>
