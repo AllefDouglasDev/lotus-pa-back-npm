@@ -1,10 +1,11 @@
 import { GluegunCommand } from 'gluegun'
+import { camelToSnake } from '../utils/camel-change'
 
 const command: GluegunCommand = {
   name: 'model:generate',
   description: 'Create a model inside /models folder',
   run: async toolbox => {
-    const { print, parameters, template } = toolbox
+    const { print, parameters, createModel, createMigration } = toolbox
 
     const { first, options } = parameters
 
@@ -13,37 +14,13 @@ const command: GluegunCommand = {
       return
     }
 
-    function camelToSnake(str: string): string {
-      return str
-        .replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`)
-        .slice(1)
-    }
-
     const tableName = options.table || camelToSnake(first) + 's'
 
+    createModel(first, tableName)
+
     if (options.migration || options.m) {
-      const now = new Date().getTime()
-      const migrationFileName = `${now}-create-${tableName.replace(
-        '_',
-        '-'
-      )}.js`
-
-      await template.generate({
-        template: 'migration.ts.ejs',
-        target: `src/database/migrations/${migrationFileName}`,
-        props: { tableName }
-      })
-
-      print.info(`${migrationFileName} migration created`)
+      createMigration(tableName)
     }
-
-    await template.generate({
-      template: 'model.ts.ejs',
-      target: `src/models/${first}.ts`,
-      props: { name: first, tableName }
-    })
-
-    print.success(`${first}.ts model created`)
   }
 }
 
