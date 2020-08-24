@@ -1,0 +1,24 @@
+import { Model, DataTypes, Optional } from 'sequelize'
+
+import { database } from '@database/index'
+
+export interface <%= props.name %>Attributes {
+  id?: number
+}
+
+type <%= props.name %>CreationAttributes = Optional<<%= props.name %>Attributes, 'id'>
+
+export default class <%= props.name %> extends Model<<%= props.name %>Attributes, <%= props.name %>CreationAttributes>
+  implements <%= props.name %>Attributes {
+  public id: number
+
+  public readonly createdAt: Date
+
+  public readonly updatedAt: Date
+}
+
+const options = { sequelize: database, underscored: true, tableName: '<%= props.tableName %>' }
+
+const dataTypes = {}
+
+<%= props.name %>.init(dataTypes, options)
